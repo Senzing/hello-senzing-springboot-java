@@ -39,12 +39,7 @@ The license agreement for this repository is stated in the
 
 ## Questions
 
-Please do not use the GitHub issue tracker to submit questions.
-
-TODO: Instead, use ???
-
-1. ??? Slack ???
-1. ??? stackoverflow.com ???
+TODO:
 
 ## Feature Requests
 
@@ -83,7 +78,7 @@ The variables are used throughout the installation procedure.
 
 ```console
 export GIT_ACCOUNT=senzing
-export GIT_REPOSITORY=senzing-repository-template
+export GIT_REPOSITORY=hello-senzing-springboot-java
 ```
 
 Synthesize environment variables.
