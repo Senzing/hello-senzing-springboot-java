@@ -144,7 +144,7 @@ git clone ${GIT_REPOSITORY_URL}
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
-    java -jar target/senzing-demo-0.0.1-SNAPSHOT.jar
+    java -jar target/senzing-demo-0.0.1.jar
     ```
 
 1. [Test the service](../README.md#test).

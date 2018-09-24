@@ -18,6 +18,8 @@ These programs will be used in the installation and demonstration of Senzing.
 They need to be installed first.
 
 ```console
+sudo apt-get update
+
 sudo apt-get -y install \
   curl \
   git-core \
@@ -135,7 +137,7 @@ git clone ${GIT_REPOSITORY_URL}
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
-    java -jar target/senzing-demo-0.0.1-SNAPSHOT.jar
+    java -jar target/senzing-demo-0.0.1.jar
     ```
 
 1. [Test the service](../README.md#test).
