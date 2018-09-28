@@ -11,7 +11,6 @@ public class SenzingDemoApplication {
 		System.out.println("**********************Java Library Value: " + System.getProperty("java.library.path"));
 		System.out.println("**********************DYLD Env Value: " + System.getenv("DYLD_LIBRARY_PATH"));
 		System.out.println("**********************DYLD Value: " + System.getProperty("DYLD_LIBRARY_PATH"));
-		System.out.println("**********************FOO Value: " + System.getenv("FOO"));
 
 		SpringApplication.run(SenzingDemoApplication.class, args);
 	}
