@@ -1,13 +1,18 @@
 # Debian-based installation
 
 The following instruction are meant to be "copy-and-paste" to install and demonstrate.
+If a step requires you to think and make a decision, it will be prefaced with :warning:.
+
+The instructions have been tested against a bare
+[ubuntu-18.04.1-server-amd64.iso](http://cdimage.ubuntu.com/ubuntu/releases/bionic/release/ubuntu-18.04.1-server-amd64.iso)
+image.
 
 ## Overview
 
 1. [Install prerequisites](#prerequisites)
 1. [Set environment variables](#set-environment-variables)
 1. [Clone repository](#clone-repository)
-1. [Install Senzing](#install-senzing)
+1. [Install](#install)
 1. [Build service](#build-service)
 1. [Run service](#run-service)
 1. [Clean up](#clean-up)
@@ -22,7 +27,7 @@ sudo apt-get update
 
 sudo apt-get -y install \
   curl \
-  git-core \
+  git \
   jq \
   maven \
   sqlite
@@ -41,20 +46,29 @@ If a JDK is not installed, you can install with the following command:
 ```console
 sudo apt-get -y install \
   openjdk-8-jdk-headless
+  
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre  
 ```
 
 ## Set Environment variables
 
-These variables may be modified, but do not need to be modified.
-The variables are used throughout the installation procedure.
+1. :warning: These variables may be modified, but do not need to be modified.
+   The variables are used throughout the installation procedure.
 
-```console
-export GIT_ACCOUNT_DIR=~/senzing.git
-export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/hello-senzing-springboot-java"
-export GIT_REPOSITORY_URL="https://github.com/senzing/hello-senzing-springboot-java.git"
-export SENZING_DIR=/opt/senzing
-export LD_LIBRARY_PATH=${SENZING_DIR}/g2/lib:${SENZING_DIR}/g2/lib/debian:$LD_LIBRARY_PATH
-```
+    ```console
+    export GIT_ACCOUNT=senzing
+    export GIT_REPOSITORY=hello-senzing-springboot-java
+    export SENZING_DIR=/opt/senzing
+    ```
+    
+1. Synthesize environment variables.
+
+    ```console
+    export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
+    export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
+    export GIT_REPOSITORY_URL="https://github.com/${GIT_ACCOUNT}/${GIT_REPOSITORY}.git"
+    export LD_LIBRARY_PATH=${SENZING_DIR}/g2/lib:${SENZING_DIR}/g2/lib/debian:$LD_LIBRARY_PATH
+    ```
 
 1. If not set, export `JAVA_HOME`.
 
@@ -74,7 +88,7 @@ cd  ${GIT_ACCOUNT_DIR}
 git clone ${GIT_REPOSITORY_URL}
 ```
 
-## Install Senzing
+## Install
 
 1. Download [Senzing_API.tgz](https://s3.amazonaws.com/public-read-access/SenzingComDownloads/Senzing_API.tgz).
 

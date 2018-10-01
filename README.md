@@ -71,16 +71,6 @@ To test the service, open a web-browser (e.g. FireFox, Chrome, Safari, MS Explor
 
     View results in `${GIT_REPOSITORY_DIR}/doc/curl-commands.out`
 
-## Create JavaDoc
-
-```console
-mkdir -p ${GIT_REPOSITORY_DIR}/target
-javadoc \
-  -d ${GIT_REPOSITORY_DIR}/target/javadoc \
-  -sourcepath ${GIT_REPOSITORY_DIR}/src/main/java \
-  com.senzing.senzingdemo
-```
-
 ## References
 
 1. [Spring Boot](http://spring.io/projects/spring-boot)
