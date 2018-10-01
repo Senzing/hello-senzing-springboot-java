@@ -23,13 +23,13 @@ A license agreement is not needed for submitting feature request, bug reporting,
 ### Individual Contributor License Agreement
 
 In order to contribute to this repository, an
-[Individual Contributor License Agreement (ICLA)](.github/individual-contributor-license-agreement.md)
+[Individual Contributor License Agreement (ICLA)](.github/senzing-individual-contributor-license-agreement.pdf)
 must be completed, submitted and accepted.
 
 ### Corporate Contributor License Agreement
 
 If the contribution to this repository is on behalf of a company, a
-[Corporate Contributor License Agreement (CCLA)](.github/corporate-contributor-license-agreement.md)
+[Corporate Contributor License Agreement (CCLA)](.github/senzing-corporate-contributor-license-agreement.pdf)
 must also be completed, submitted and accepted.
 
 ### Project License Agreement
@@ -115,3 +115,5 @@ Follow GitHub's
 [Creating a pull request from a branch](https://help.github.com/articles/creating-a-pull-request/)
 or
 [Creating a pull request from a fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) instructions.
+
+Accepting pull requests will be at the discretion of Senzing, Inc. and the repository owner(s).
