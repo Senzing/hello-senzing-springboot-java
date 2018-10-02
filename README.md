@@ -43,7 +43,7 @@ To test the service, open a web-browser (e.g. FireFox, Chrome, Safari, MS Explor
 1. Set environment variables.
 
     ```console
-    export GIT_REPOSITORY_DIR="~/senzing.git/hello-senzing-springboot-java"
+    export GIT_REPOSITORY_DIR=~/senzing.git/hello-senzing-springboot-java
     export SENZING_DEMO_DATASOURCE="TEST"
     export SENZING_DEMO_URL="http://localhost:8080"
     ```
