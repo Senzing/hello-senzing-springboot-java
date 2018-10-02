@@ -3,6 +3,8 @@ package com.senzing.senzingdemo;
 import com.senzing.g2.engine.G2Engine;
 import com.senzing.g2.engine.G2JNI;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.annotation.PreDestroy;
 
@@ -25,6 +27,10 @@ public class G2EngineFacade {
     }
     System.out.println("Engine started successfully");
   }
+  
+  @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "NOT FOUND")
+  public class HttpNotFoundException extends RuntimeException {
+  }  
 
   @PreDestroy
   public void shutDown() {
@@ -69,7 +75,12 @@ public class G2EngineFacade {
   public String getRecord(String dataSourceCode, String recordID) {
     StringBuffer response = new StringBuffer();
     int resultCode = engine.getRecord(dataSourceCode, recordID, response);
-    checkForError(resultCode, "getRecord");
+    switch(resultCode) {
+    case -2:
+      throw new HttpNotFoundException();
+    default:
+      checkForError(resultCode, "getRecord");
+    }
     return response.toString();
   }
 
@@ -88,9 +99,11 @@ public class G2EngineFacade {
   }
 
   public String searchByAttributes(String jsonData) {
+    System.out.println("Enter searchByAttributes(" + jsonData + ")");
     StringBuffer response = new StringBuffer();
     int resultCode = engine.searchByAttributes(jsonData, response);
     checkForError(resultCode, "searchByAttributes");
+    System.out.println("Exit  searchByAttributes(" + jsonData + ")");    
     return response.toString();
   }
 
