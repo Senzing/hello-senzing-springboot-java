@@ -70,12 +70,20 @@ curl -X GET \
   ${SENZING_DEMO_URL}/get-record/${SENZING_DEMO_DATASOURCE}/${RECORD_ID} | jq .
 
 # Query by attribute.
+
+QUERY_STRING='q={"NAME_TYPE": "PRIMARY", "NAME_FIRST": "JANET", "NAME_LAST": "SMITH", "ADDR_TYPE": "HOME", "ADDR_LINE1": "653 STATE ROUTE 7", "ADDR_CITY": "FRESNO", "ADDR_STATE": "CA", "ADDR_POSTAL_CODE": "55073-1234"}'
+curl \
+  --get \
+  --data-urlencode "${QUERY_STRING}" \
+  ${SENZING_DEMO_URL}/search-by-attributes | jq .
+
+# Query by attribute.
 # CAVEAT: Query does not return results.  Why?
 
-QUERY_STRING='{"NAME_TYPE": "PRIMARY", "NAME_FIRST": "JANET", "NAME_LAST": "SMITH", "ADDR_TYPE": "HOME", "ADDR_LINE1": "653 STATE ROUTE 7", "ADDR_CITY": "FRESNO", "ADDR_STATE": "CA", "ADDR_POSTAL_CODE": "55073-1234"}'
-curl -X GET \
-  --globoff \
-  "${SENZING_DEMO_URL}/search-by-attributes/?q=${QUERY_STRING}"
+#QUERY_STRING='{"NAME_TYPE": "PRIMARY", "NAME_FIRST": "JANET", "NAME_LAST": "SMITH", "ADDR_TYPE": "HOME", "ADDR_LINE1": "653 STATE ROUTE 7", "ADDR_CITY": "FRESNO", "ADDR_STATE": "CA", "ADDR_POSTAL_CODE": "55073-1234"}'
+#curl -X GET \
+#  --globoff \
+#  "${SENZING_DEMO_URL}/search-by-attributes/?q=${QUERY_STRING}"
 
 # Delete record.
 

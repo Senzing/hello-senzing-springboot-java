@@ -43,11 +43,9 @@ To test the service, open a web-browser (e.g. FireFox, Chrome, Safari, MS Explor
 1. Set environment variables.
 
     ```console
-    export GIT_ACCOUNT_DIR=~/senzing.git
-    export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/hello-senzing-springboot-java"
+    export GIT_REPOSITORY_DIR="~/senzing.git/hello-senzing-springboot-java"
     export SENZING_DEMO_DATASOURCE="TEST"
     export SENZING_DEMO_URL="http://localhost:8080"
-    export SENZING_DIR=/opt/senzing
     ```
 
 1. Get the Senzing workload statistics.
@@ -56,12 +54,14 @@ To test the service, open a web-browser (e.g. FireFox, Chrome, Safari, MS Explor
     curl -X GET \
       ${SENZING_DEMO_URL}/stats
     ```
+
 1. If you would like the JSON HTTP response formatted, you can pipe the output to `jq`.  Example:
 
     ```console
     curl -X GET \
       ${SENZING_DEMO_URL}/stats | jq
     ```
+
 1. Exercise a number of APIs via `curl` command in [curl-command.sh](doc/curl-commands.sh).
 
     ```console
