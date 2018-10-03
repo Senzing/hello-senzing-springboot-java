@@ -41,7 +41,7 @@ $ javac -version
 javac 1.8.0_181
 ```
 
-If a JDK is not installed, you can install with the following command:
+If a JDK is not installed, you can install with the following commands:
 
 ```console
 sudo apt-get -y install \

@@ -5,7 +5,7 @@
 This demonstration shows how to wrap Senzing with Spring-boot to create an HTTP API.
 
 The resulting HTTP API is documented in
-[OpenAPI.json](https://raw.githubusercontent.com/senzing/hello-senzing-springboot-java/master/doc/OpenAPI.json)
+[OpenAPI.json](doc/OpenAPI.json)
 and can be viewed in the
 [Swagger editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/senzing/hello-senzing-springboot-java/master/doc/OpenAPI.json).
 
