@@ -75,18 +75,19 @@ public class G2EngineFacade {
   public String getRecord(String dataSourceCode, String recordID) {
     StringBuffer response = new StringBuffer();
     int resultCode = engine.getRecord(dataSourceCode, recordID, response);
-    switch(resultCode) {
-    case -2:
+    if (response.length() == 0 || resultCode != 0 && engine.getLastException().startsWith("0033E")) {
       throw new HttpNotFoundException();
-    default:
-      checkForError(resultCode, "getRecord");
     }
+    checkForError(resultCode, "getRecord");
     return response.toString();
   }
 
   public String getEntityByEntityID(long entityID) {
     StringBuffer response = new StringBuffer();
     int resultCode = engine.getEntityByEntityID(entityID, response);
+    if (response.length() == 0 || resultCode != 0 && engine.getLastException().startsWith("0033E")) {
+      throw new HttpNotFoundException();
+    }
     checkForError(resultCode, "getEntityByEntityID");
     return response.toString();
   }
@@ -94,6 +95,9 @@ public class G2EngineFacade {
   public String getEntityByRecordID(String dataSourceCode, String recordID) {
     StringBuffer response = new StringBuffer();
     int resultCode = engine.getEntityByRecordID(dataSourceCode, recordID, response);
+    if (response.length() == 0 || resultCode != 0 && engine.getLastException().startsWith("0033E")) {
+      throw new HttpNotFoundException();
+    }
     checkForError(resultCode, "getEntityByRecordID");
     return response.toString();
   }
@@ -103,7 +107,7 @@ public class G2EngineFacade {
     StringBuffer response = new StringBuffer();
     int resultCode = engine.searchByAttributes(jsonData, response);
     checkForError(resultCode, "searchByAttributes");
-    System.out.println("Exit  searchByAttributes(" + jsonData + ")");    
+    System.out.println("Exit  searchByAttributes(" + jsonData + ")");
     return response.toString();
   }
 
