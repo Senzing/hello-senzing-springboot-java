@@ -1,0 +1,136 @@
+package com.senzing.senzingdemo;
+
+import com.senzing.g2.engine.G2Engine;
+import com.senzing.g2.engine.G2JNI;
+import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.annotation.PreDestroy;
+
+@Service
+public class G2EngineFacade {
+
+  private static final String MODULE_NAME = "testProject";
+
+  private final G2Engine engine;
+
+  public G2EngineFacade() {
+    engine = new G2JNI();
+
+    String iniFileName = getInitFileLocation();
+    boolean verboseLogging = false;
+    System.out.println("Starting engine");
+    int result = engine.init(MODULE_NAME, iniFileName, verboseLogging);
+    if (result != 0) {
+      throw new IllegalStateException("Failed to initialize engine " + engine.getLastException());
+    }
+    System.out.println("Engine started successfully");
+  }
+  
+  @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "NOT FOUND")
+  public class HttpNotFoundException extends RuntimeException {
+  }  
+
+  @PreDestroy
+  public void shutDown() {
+    System.out.println("Stopping engine");
+    int destroyResult = engine.destroy();
+    System.out.println("Engine stopped with code: " + destroyResult);
+  }
+
+  public String stats() {
+    return engine.stats();
+  }
+
+  public String exportConfig() {
+    StringBuffer response = new StringBuffer();
+    int resultCode = engine.exportConfig(response);
+    checkForError(resultCode, "exportConfig");
+    return response.toString();
+  }
+
+  public void addRecord(String dataSourceCode, String recordID, String record) {
+    int resultCode = engine.addRecord(dataSourceCode, recordID, record, null);
+    checkForError(resultCode, "addRecord");
+  }
+
+  public String addRecordWithReturnedRecordID(String dataSourceCode, String record) {
+    StringBuffer recordID = new StringBuffer();
+    int resultCode = engine.addRecordWithReturnedRecordID(dataSourceCode, recordID, record, null);
+    checkForError(resultCode, "addRecordWithReturnedRecordID");
+    return recordID.toString();
+  }
+
+  public void deleteRecord(String dataSourceCode, String recordID) {
+    int resultCode = engine.deleteRecord(dataSourceCode, recordID, null);
+    checkForError(resultCode, "deleteRecord");
+  }
+
+  public void replaceRecord(String dataSourceCode, String recordID, String jsonData) {
+    int resultCode = engine.replaceRecord(dataSourceCode, recordID, jsonData, null);
+    checkForError(resultCode, "replaceRecord");
+  }
+
+  public String getRecord(String dataSourceCode, String recordID) {
+    StringBuffer response = new StringBuffer();
+    int resultCode = engine.getRecord(dataSourceCode, recordID, response);
+    if (response.length() == 0 || resultCode != 0 && engine.getLastException().startsWith("0033E")) {
+      throw new HttpNotFoundException();
+    }
+    checkForError(resultCode, "getRecord");
+    return response.toString();
+  }
+
+  public String getEntityByEntityID(long entityID) {
+    StringBuffer response = new StringBuffer();
+    int resultCode = engine.getEntityByEntityID(entityID, response);
+    if (response.length() == 0 || resultCode != 0 && engine.getLastException().startsWith("0033E")) {
+      throw new HttpNotFoundException();
+    }
+    checkForError(resultCode, "getEntityByEntityID");
+    return response.toString();
+  }
+
+  public String getEntityByRecordID(String dataSourceCode, String recordID) {
+    StringBuffer response = new StringBuffer();
+    int resultCode = engine.getEntityByRecordID(dataSourceCode, recordID, response);
+    if (response.length() == 0 || resultCode != 0 && engine.getLastException().startsWith("0033E")) {
+      throw new HttpNotFoundException();
+    }
+    checkForError(resultCode, "getEntityByRecordID");
+    return response.toString();
+  }
+
+  public String searchByAttributes(String jsonData) {
+    System.out.println("Enter searchByAttributes(" + jsonData + ")");
+    StringBuffer response = new StringBuffer();
+    int resultCode = engine.searchByAttributes(jsonData, response);
+    checkForError(resultCode, "searchByAttributes");
+    System.out.println("Exit  searchByAttributes(" + jsonData + ")");
+    return response.toString();
+  }
+
+  public void purgeRepository() {
+    int resultCode = engine.purgeRepository();
+    checkForError(resultCode, "purgeRepository");
+  }
+
+  private String getInitFileLocation() {
+    final String osName = System.getProperty("os.name");
+    if (osName.startsWith("Windows")) {
+      return "\\senzing\\g2\\python\\G2Module.ini";
+    }
+    else {
+      return "/opt/senzing/g2/python/G2Module.ini";
+    }
+  }
+
+  private void checkForError(int resultCode, String failedAction) {
+    if (resultCode != 0) {
+      String lastException = engine.getLastException();
+      engine.clearLastException();
+      throw new IllegalStateException("Failed during " + failedAction + " " + lastException);
+    }
+  }
+}
