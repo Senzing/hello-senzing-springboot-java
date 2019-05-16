@@ -1,5 +1,17 @@
 # Hello Senzing Spring-boot for Java
 
+## Caveat
+
+This repository is an example of using SpringBoot with Senzing.
+It is NOT intended as a REST API server;
+it does not adhere to the
+official [Senzing REST API](https://github.com/Senzing/senzing-rest-api),
+nor has it been tuned for production.
+
+If you are looking for Senzing's official REST API and REST API server, see
+[Senzing/senzing-rest-api](https://github.com/Senzing/senzing-rest-api) and
+[Senzing/senzing-api-server](https://github.com/Senzing/senzing-api-server).
+
 ## Overview
 
 This demonstration shows how to wrap Senzing with Spring-boot to create an HTTP API.
