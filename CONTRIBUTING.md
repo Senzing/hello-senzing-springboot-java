@@ -39,7 +39,12 @@ The license agreement for this repository is stated in the
 
 ## Questions
 
-TODO:
+Please do not use the GitHub issue tracker to submit questions.
+
+TODO: Instead, use ???
+
+1. ??? Slack ???
+1. ??? stackoverflow.com ???
 
 ## Feature Requests
 
