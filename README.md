@@ -1,5 +1,9 @@
 # Hello Senzing Spring-boot for Java
 
+## :warning: Obsolete
+
+This repository has not been updated to use the RPM/DEB installation of Senzing.
+
 ## Caveat
 
 This repository is an example of using SpringBoot with Senzing.
