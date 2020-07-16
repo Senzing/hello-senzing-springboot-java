@@ -9,11 +9,11 @@ This repository has not been updated to use the RPM/DEB installation of Senzing.
 This repository is an example of using SpringBoot with Senzing.
 It is NOT intended as a REST API server;
 it does not adhere to the
-official [Senzing REST API](https://github.com/Senzing/senzing-rest-api),
+official [Senzing REST API](https://github.com/Senzing/senzing-rest-api-specification),
 nor has it been tuned for production.
 
 If you are looking for Senzing's official REST API and REST API server, see
-[Senzing/senzing-rest-api](https://github.com/Senzing/senzing-rest-api) and
+[Senzing/senzing-rest-api-specification](https://github.com/Senzing/senzing-rest-api-specification) and
 [Senzing/senzing-api-server](https://github.com/Senzing/senzing-api-server).
 
 ## Overview
